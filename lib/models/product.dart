@@ -5,12 +5,13 @@ class Product{
   final String productDexcription;
   final double price;
 
-  Product(
-      { required this.id,
+  Product({
+        required this.id,
         required this.productName,
         required this.productImage,
         required this.productDexcription,
-        required this.price});
+        required this.price
+      });
 
 }
 

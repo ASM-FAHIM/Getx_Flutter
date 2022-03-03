@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_cart_eshop/controllers/cart_controller.dart';
 import 'package:getx_cart_eshop/controllers/shoppingController.dart';
+import 'package:getx_cart_eshop/views/cart_page.dart';
 
 class ShoppingPage extends StatelessWidget {
 
@@ -19,7 +20,7 @@ class ShoppingPage extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back)),
       ),
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.white60,
       body: SafeArea(
         child: Column(
           children: [
@@ -90,7 +91,7 @@ class ShoppingPage extends StatelessWidget {
         backgroundColor: Colors.teal,
           icon: Icon(Icons.add_shopping_cart_outlined, size: 30,),
           onPressed: (){
-
+          Get.to(()=> CartPage());
           },
           label: GetX<CartController>(
             builder: (controller) {

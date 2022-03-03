@@ -1,11 +1,11 @@
-class Product{
+class ProductList{
   final int id;
   final String productName;
   final String productImage;
   final String productDexcription;
   final double price;
 
-  Product({
+  ProductList({
         required this.id,
         required this.productName,
         required this.productImage,

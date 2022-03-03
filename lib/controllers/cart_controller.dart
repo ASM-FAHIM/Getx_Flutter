@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_cart_eshop/models/product.dart';
+import 'package:getx_cart_eshop/models/productList.dart';
 
 class CartController extends GetxController{
 
-  var cartItems = <Product> [].obs;
+  var cartItems = <ProductList> [].obs;
   int get count => cartItems.length;
 
   //if we want to add manually by using dartLang
-  double get productPrice =>
+  double get productTotalPrice =>
       cartItems.fold(0, (previousValue, element) =>
       previousValue+element.price
       );
-  addToCart(Product product) {
+  addToCart(ProductList product) {
     cartItems.add(product);
   }
 }

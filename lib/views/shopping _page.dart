@@ -9,18 +9,45 @@ class ShoppingPage extends StatelessWidget {
   final shoppingController = Get.put(ShoppingController());
   final cartController = Get.put(CartController());
 
+   ShoppingPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Products"),
+        actions: [
+          // IconButton(
+          //     onPressed: (){
+          //       Get.to(()=> CartPage());
+          //     },
+          //   icon: Icon(Icons.add_shopping_cart_outlined, size: 30,),
+          // ),
+          FloatingActionButton.extended(
+              backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.add_shopping_cart_outlined,
+                size: 25,),
+              onPressed: (){
+                Get.to(()=> CartPage());
+              },
+              label: GetX<CartController>(
+                  builder: (controller) {
+                    return Text(controller.count.toString(),
+                      style: TextStyle(fontSize: 20),
+                    );
+                  }
+              ),
+            elevation: 0,
+          ),
+        ],
         leading: IconButton(
             onPressed: () {
               Get.back();
             },
             icon: const Icon(Icons.arrow_back)),
       ),
-      backgroundColor: Colors.white60,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -28,58 +55,58 @@ class ShoppingPage extends StatelessWidget {
               child: GetX<ShoppingController>(
                 builder: (controller) {
                   return ListView.builder(
-                    itemCount: controller.products.length,
+                    itemCount: controller.productList.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        margin: const EdgeInsets.all(12),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${controller.products[index].productName}',
-                                        style: TextStyle(fontSize: 24),
-                                      ),
-                                      Text(
-                                          '${controller.products[index].productDexcription}'),
-                                    ],
-                                  ),
-                                  Text('\$${controller.products[index].price}',
-                                      style: TextStyle(fontSize: 24)),
-                                ],
-                              ),
-                              RaisedButton(
-                                onPressed: () {
-                                  cartController
-                                      .addToCart(controller.products[index]);
-                                },
-                                color: Colors.blue,
-                                textColor: Colors.white,
-                                child: Text('Add to Cart'),
-                              ),
-                            ],
+                      return InkWell(
+                        child  : Card(
+                          color: Colors.white70,
+                          margin: const EdgeInsets.all(12),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${controller.productList[index].productName}',
+                                          style: TextStyle(fontSize: 24),
+                                        ),
+                                        Text(
+                                            '${controller.productList[index].productDexcription}'),
+                                      ],
+                                    ),
+                                    Text("BDT: "+'${controller.productList[index].price}',
+                                        style: TextStyle(fontSize: 24)),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                        onTap: (){
+                          cartController
+                              .addToCart(controller.productList[index]
+                          );
+                        },
                       );
                     },
                   );
                 },
               ),
             ),
+            SizedBox(height: 10,),
             GetX<CartController>(
                 builder: (controller) {
                 return Text(
-                'Total amount: \$ ${controller.productPrice}',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                'Total amount: BDT ${controller.productTotalPrice}',
+                style: TextStyle(fontSize: 20, color: Colors.black),
               );
             }
             ),
@@ -87,19 +114,6 @@ class ShoppingPage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: Colors.teal,
-          icon: Icon(Icons.add_shopping_cart_outlined, size: 30,),
-          onPressed: (){
-          Get.to(()=> CartPage());
-          },
-          label: GetX<CartController>(
-            builder: (controller) {
-              return Text(controller.count.toString(),
-                style: TextStyle(fontSize: 20),
-              );
-            }
-          )),
     );
   }
 }

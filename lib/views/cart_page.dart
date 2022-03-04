@@ -8,19 +8,17 @@ class CartPage extends StatelessWidget {
 
   final cartController = Get.put(CartController());
 
-  int item = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF8CA6DB),
-        title: const Center(
-          child: Text("Cart",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+        title: Text("Cart",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -44,23 +42,27 @@ class CartPage extends StatelessWidget {
                                 onPressed: (){},
                                 child:
                                 //_progressBarActive == false?const CircularProgressIndicator():
-                                Text(controller.cartItems[index].productName),
+                                Text("Product Image"),
 
                               ),
                             ),
 
-                            Text("Fork Lift "),
+                            Text(controller.cartItems[index].productName),
 
                             // SizedBox(width: 100,),
 
                             IconButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  controller.item++;
+                                },
                                 icon: Icon(Icons.remove)
                             ),
-                            Text("$item"),
+                            Text('${controller.item}'),
                             IconButton(
 
-                                onPressed: (){},
+                                onPressed: (){
+                                  controller.item--;
+                                },
                                 icon: Icon(Icons.add)
                             ),
 

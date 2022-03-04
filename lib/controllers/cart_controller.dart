@@ -6,6 +6,7 @@ class CartController extends GetxController{
 
   var cartItems = <ProductList> [].obs;
   int get count => cartItems.length;
+  int item = 0;
 
   //if we want to add manually by using dartLang
   double get productTotalPrice =>

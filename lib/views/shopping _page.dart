@@ -105,7 +105,7 @@ class ShoppingPage extends StatelessWidget {
             GetX<CartController>(
                 builder: (controller) {
                 return Text(
-                'Total amount: BDT ${controller.productTotalPrice}',
+                'Total amount: BDT= ${controller.productTotalPrice}',
                 style: TextStyle(fontSize: 20, color: Colors.black),
               );
             }
